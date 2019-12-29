@@ -1,0 +1,9 @@
+sohai:007:1
+sohai:008:2
+yarsamin:1111:3
+kyawmintun:007:4
+thanthanaye:1234:5
+tintun:5678:6
+koko:0992:7
+mg mg:0098:8
+yehtet:999:9
