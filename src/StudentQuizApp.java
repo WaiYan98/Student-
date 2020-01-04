@@ -2,10 +2,7 @@ import java.util.Scanner;
 
 public class StudentQuizApp {
 
-    private static AdminUserFunction adminUserFunction =
-            new AdminUserFunction();
-    private static LoginControl loginControl = new LoginControl();
-    private static StudentUserFunction stuFunction = new StudentUserFunction();
+    private static Control control = new Control();
 
     private static Scanner intScan = new Scanner(System.in);
     private static Scanner scan = new Scanner(System.in);
@@ -20,9 +17,9 @@ public class StudentQuizApp {
         int userNum = 0;
         int function = 0;
 
-        loginControl.readLogin();
-        stuFunction.readScore();
-        adminUserFunction.readSaveQuiz();
+        control.readLogin();
+        control.readScore();
+        control.readQuiz();
 
         while (true) {
             System.out.println("LOGIN");
@@ -35,7 +32,7 @@ public class StudentQuizApp {
             if (Login.logIn(new User(name, password, 0))) {
                 userNum = 1;
                 break;
-            } else if (loginControl.checkLogin(new User(name, password, 0))) {
+            } else if (control.checkLogin(new User(name, password, 0))) {
                 userNum = 2;
                 break;
             }
@@ -123,28 +120,25 @@ public class StudentQuizApp {
 
         }
 
-        loginControl.saveLogin();
-        adminUserFunction.saveQuiz();
-        stuFunction.saveQuizScore();
-
+        control.saveLogin();
+        control.saveQuiz();
+        control.saveScore();
     }
 
     public static void info() {
         System.out.println("");
-        adminUserFunction.showAllScore(StudentUserFunction.studentList,
-                loginControl.userList);
+        control.showAllScore();
         System.out.println("");
-        adminUserFunction.showHiLoAvg(StudentUserFunction.studentList);
+        control.showHiLoAvg();
     }
 
     public static void handleReset() {
-        adminUserFunction.reset
-                (StudentUserFunction.studentList);
+        control.reset();
     }
 
     public static void handleCreateQuiz() {
         while (true) {
-            adminUserFunction.createQuiz();
+            control.createQuiz();
 
             System.out.println("If do you want to create enter 1 or exit enter 0 :");
             int exit = intScan.nextInt();
@@ -156,7 +150,7 @@ public class StudentQuizApp {
     }
 
     public static void handleReadQuiz() {
-        adminUserFunction.read();
+        control.read();
     }
 
     public static void handleUpdateQuiz() {
@@ -183,7 +177,7 @@ public class StudentQuizApp {
             System.out.println("Please enter the answer :");
             int ans = intScan.nextInt();
 
-            adminUserFunction.update(upNum, new Quiz(question, choice, ans));
+            control.updateQ(upNum, new Quiz(question, choice, ans));
 
             System.out.println("If do you want to update enter 1 or exit enter 0 :");
             int exit = intScan.nextInt();
@@ -195,7 +189,7 @@ public class StudentQuizApp {
 
     public static void handleDeleteQuiz() {
         while (true) {
-            adminUserFunction.delete();
+            control.deleteQ();
 
             System.out.println("If do you want to delete enter 1 or exit enter 0 :");
             int exit = intScan.nextInt();
@@ -211,7 +205,7 @@ public class StudentQuizApp {
         String button = scan.nextLine();
 
         if (button.equals("yes")) {
-            adminUserFunction.deleteAll();
+            control.deleteAllQ();
         }
     }
 
@@ -221,8 +215,7 @@ public class StudentQuizApp {
 
         System.out.println("Please enter password :");
         String password = scan.nextLine();
-        adminUserFunction.register(StudentUserFunction.studentList,
-                loginControl.userList, name, password);
+        control.register(name, password);
     }
 
     public static void showStudentFunction() {
@@ -231,12 +224,9 @@ public class StudentQuizApp {
     }
 
     public static void handleToAnswerQuiz() {
-        if (adminUserFunction.checkFinishQuiz(StudentUserFunction.studentList,
-                loginControl.nameToId(name))) {
-            stuFunction.studentToAnsQuiz(adminUserFunction.quizList,
-                    adminUserFunction.ansList);
-            adminUserFunction.checkAns(StudentUserFunction.studentList,
-                    loginControl.nameToId(name));
+        if (control.checkFinishQuiz(control.nameToId(name))) {
+            control.studentToAnsQuiz();
+            control.checkAns(control.nameToId(name));
         } else {
             System.err.println("You have already answer the quiz");
         }
@@ -245,8 +235,7 @@ public class StudentQuizApp {
     public static void showTheirScore() {
         System.out.println("Name" + "\t" + "\t" + "\t" + "Score");
         System.out.println(" " + name + "\t" + "\t" + "\t" + " " +
-                stuFunction.getTheirScore(StudentUserFunction.idToIndex
-                        (loginControl.nameToId(name))));
+                control.getTheirScore(control.idToIndex(control.nameToId(name))));
     }
 
 

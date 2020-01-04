@@ -7,3 +7,5 @@ tintun:5678:6
 koko:0992:7
 mg mg:0098:8
 yehtet:999:9
+khant ko:009:10
+mgmg:199:11

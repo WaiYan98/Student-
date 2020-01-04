@@ -8,4 +8,3 @@ The most powerful country in the world is0Thiland:North-Korea:United States:Chin
 The longest river in the world is0Nile:Amazon River:Yellow River:Lena River:01
 The richest country in the world is0Macau:Singapore:Brunei:Qatar:04
 The poorest country in the world is0Taiwan:Marshall Islands:Somalia:Tanzania:04
-the best laptop is0apple:lenovo:hp:asus:02

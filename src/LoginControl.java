@@ -36,15 +36,4 @@ public class LoginControl {
         return result;
     }
 
-    public int nameToId(String name) {
-        int id = 0;
-        for (int i = 0; i < userList.size(); i++) {
-            if (name.equals(userList.get(i).getName())) {
-                id = userList.get(i).getId();
-                break;
-            }
-        }
-        return id;
-    }
-
 }
